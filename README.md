@@ -36,7 +36,7 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
 
 ## Key Features
 
-- [ ]Be able to operate basic math operations
+- [ ] Be able to operate basic math operations
   - [ ] add
   - [ ] substract
   - [ ] multiply
@@ -71,41 +71,48 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
 After reading the first chapter of the book "Think like a programmer", I wanted to put in practice that philosophy of "Always have a plan". For this purpose, I spend a few hours researching and thinking about the best way to implement each feature in plain english.
 
 ```
-Create an empty input array
+Declare an empty first input array
+Declare an empty second input array
+Declare an empty current Operator array
+Declare the result as 0
 
-<!-- Basic math operations -->
-function for adding numbers (a, b)
-function for substract (a, b)
-function for multiply (a, b)
-function for divide (a, b)
+Add function for adding numbers (a, b)
+Add function for substract (a, b)
+Add function for multiply (a, b)
+Add function for divide (a, b)
 
-<!-- Operation -->
 Create function operation with (operator, firstInput, secondInput)
+  Make an if statement for each basic math operation
   if currentOperator corresponds to the operation  {
     return that operation function with (firstInput, secondInput)
   }
 
-Create a function completeOperation
-  if(inputArr.length === 2) {
-    return the operation function with (currentOperator, input[0], input[1]);
-  }
+Create a function to clear all past data
+  empty both of the inputs arrays
+  empty the current operator array
+  declare the results as 0 again
 
-<!-- Event listeners -->
 Listen for an operation digit
   Get the id of the pressed operation digit
-  Assign that id to a variable called currentOperator
+  push that id to the currentOperator array
 
 Listen for an Input from all the number digits
-  Store the textcontent from the pressed button into a variable
-    Convert that string into a number
-    push that number into the input array.
+  Declare a variable for storing the currentValue
+  Store the textcontent from the pressed button into the currentValue
+  Convert that string into a number
+  check if the sum of firstInputArr.length and secondInputArr.length are even or odd
+    if inputs.length = odd
+      push the currentValue to the secondInputArr
+    if inputs.length = even
+      push the currentValue to the firstInputArr
 
 Listen for the equals key
-  assign a variable result to the completeOperation function
-  display that value
+  create a loop to run until the length of currentOperators
+    Add the operate(currentOperator[i], firstInputArr[i], secondInputArr[i]) to the result with +=
+  display that result value
 
 Listen for a clear button
-  empty the inputArr
+  call the clear function ()
 ```
 
 Obviously, after coding for a while, I had to re-arrange blocks and come up with solutions for a few other problems. Overall, it really helped me with speeding up the workflow.
