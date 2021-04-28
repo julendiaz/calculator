@@ -1,0 +1,35 @@
+#display-container {
+  width: 21em;
+  height: 5em;
+  margin: 0 auto;
+  padding-top: 2.5em;
+}
+
+#display-container h1 {
+  text-align: center;
+  font-size: 3em;
+}
+
+#digits-container {
+  width: 21em;
+  height: 28em;
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0 auto;
+}
+
+#digits-container .btn {
+  width: 7em;
+  height: 7em;
+}
+
+#operations-container {
+  width: 21em;
+  height: 5em;
+  margin: 0 auto;
+}
+
+#operations-container .btn {
+  width: 3em;
+  height: 3em;
+}
