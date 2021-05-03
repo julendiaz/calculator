@@ -36,16 +36,16 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
 
 ## Key Features
 
-- [ ] Be able to operate basic math operations
-  - [ ] add
-  - [ ] substract
-  - [ ] multiply
-  - [ ] divide
-- [ ] Equals key for displaying the results
-- [ ] Clear button to reset operations
-- [ ] Display to showcase the operations
-- [ ] Store multiple operations at the same time
-- [ ] Round integers so the decimals doesn't overrun the display
+- [x] Be able to operate basic math operations
+  - [x] add
+  - [x] substract
+  - [x] multiply
+  - [x] divide
+- [x] Equals key for displaying the results
+- [x] Clear button to reset operations
+- [x] Display to showcase the operations
+- [x] Store multiple operations at the same time
+- [x] Round integers so the decimals doesn't overrun the display
 - [ ] Error message if the user tries to divide by 0
 
 ## My Process
@@ -65,6 +65,20 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
   - **How to store multiple operations?**
   - **How to round integers?**
   - **how to get the operator argument?**
+
+<!-- Questions while coding -->
+
+- **How to store more than one value like 12 + 33 for example?**
+- **How could we store all inputs in one single arr?**
+  - input arr
+  - everytime a button is pressed, it adds that text content to the array
+  - [1, 2, +, 3, 3, /, 2, +, 120]
+  - join -> "12+33"
+  - We would need to match with regex each operation
+  - how get the index of each operation
+  - tell the program in case is add, then take all the numbers before, assign it as a, and all the numbers after that and assign them as b
+  - How to get the numbers before and after each operation
+  - make a for loop to operate the chunks of the input
 
 ### Pseudocode
 

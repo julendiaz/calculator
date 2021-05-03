@@ -2,12 +2,18 @@
   width: 21em;
   height: 5em;
   margin: 0 auto;
-  padding-top: 2.5em;
+  padding-top: 1em;
 }
 
 #display-container h1 {
   text-align: center;
   font-size: 3em;
+  margin-bottom: 1em;
+}
+
+#operation-display {
+  color: blue;
+  font-size: 2em;
 }
 
 #digits-container {
