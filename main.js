@@ -17,8 +17,6 @@ let results;
 let digitsArr = [];
 // Operations Count
 let operationsCount = [];
-// For splitting result
-let splitted;
 
 //----------MAIN FUNCTIONS--------------//
 
@@ -41,9 +39,6 @@ let divide = (a, b) => {
 
 // Create function operation with (operator, firstInput, secondInput)
 let operate = (operator, x, y) => {
-  //   Make an if statement for each basic math operation
-  //   if currentOperator corresponds to the operation  {
-  //     return that operation function with (firstInput, secondInput)
   if (operator === "add") {
     return add(x, y);
   } else if (operator === "substract") {
@@ -55,9 +50,24 @@ let operate = (operator, x, y) => {
   }
 };
 
+let decimalCount = (num) => {
+  // Convert to String
+  let numStr = String(num);
+  // String Contains Decimal
+  if (numStr.includes(".")) {
+    return numStr.split(".")[1].length;
+  }
+  // String Does Not Contain Decimal
+  return 0;
+};
+
 let checkForDecimals = (num) => {
-  if (num % 1 != 0) {
-    return num.toPrecision(4);
+  if (decimalCount(num) === 1) {
+    return num.toFixed(1);
+  } else if (decimalCount(num) === 2) {
+    return num.toFixed(2);
+  } else if (decimalCount(num) >= 3) {
+    return num.toFixed(3);
   } else {
     return num;
   }
@@ -69,6 +79,7 @@ let checkForInfinity = (num) => {
     operationDisplay.style.backgroundColor = "red";
   }
 };
+
 // Create a function to clear all past data
 let clearAll = () => {
   inputArr = [];
@@ -98,7 +109,7 @@ allOperators.forEach((operator) => {
     if (digitsArr.length > 0 || inputArr.length === 1) {
       // Check for odd or even so we can operate more than once
       if (inputArr.length % 2 === 0) {
-        inputArr.push(parseInt(digitsArr.join("")));
+        inputArr.push(parseFloat(digitsArr.join("")));
       }
       if (inputArr.length % 2 !== 0) {
         inputArr.push(operator.id);
@@ -115,8 +126,15 @@ allOperators.forEach((operator) => {
 allDigits.forEach((digit) => {
   digit.addEventListener("click", function () {
     // Store each digit into an array
-    digitsArr.push(digit.textContent);
-    resultsDisplay.textContent = digitsArr.join("");
+    if (inputArr.length === 1) {
+      inputArr = [];
+      digitsArr.push(digit.textContent);
+      resultsDisplay.textContent = digitsArr.join("");
+    } else {
+      digitsArr.push(digit.textContent);
+      resultsDisplay.textContent = digitsArr.join("");
+    }
+
     console.log(operationsCount, inputArr, digitsArr);
   });
 });
