@@ -46,7 +46,7 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
 - [x] Display to showcase the operations
 - [x] Store multiple operations at the same time
 - [x] Round integers so the decimals doesn't overrun the display
-- [ ] Error message if the user tries to divide by 0
+- [x] Error message if the user tries to divide by 0
 
 ## My Process
 
@@ -147,7 +147,6 @@ After finishing up the pseudocode method, I thought that some parts were a bit c
 
 ## Additional Improvements
 
-- [ ] Add decimals to the operations
 - [ ] Add a Backspace button
 - [ ] Add keybord support
 - [ ] Make it musical

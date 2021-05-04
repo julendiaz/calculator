@@ -1,4 +1,4 @@
-console.log("hello world");
+"use strict";
 
 // ---------SELECTORS------------//
 const allDigits = document.querySelectorAll(".digit");
@@ -9,7 +9,6 @@ const resultsDisplay = document.querySelector("#results");
 const operationDisplay = document.querySelector("#operation-display");
 const backKey = document.querySelector("#back-key");
 
-let superInput = [];
 // Declare an empty first input array
 let inputArr = [];
 // Declare the result as 0
@@ -18,13 +17,10 @@ let results;
 let digitsArr = [];
 // Operations Count
 let operationsCount = [];
-let counter;
-// Declare the finalInput
-let finalInput = 0;
-// Declare inputs length
-let inputsLength;
 // For splitting result
 let splitted;
+
+//----------MAIN FUNCTIONS--------------//
 
 // Add function for adding numbers (a, b)
 let add = (a, b) => {
@@ -69,33 +65,41 @@ let checkForDecimals = (num) => {
 
 let checkForInfinity = (num) => {
   if (!isFinite(num)) {
+    // Display a transition into black like a black hole and say something like, hey you created a black hole.
     operationDisplay.style.backgroundColor = "red";
   }
 };
 // Create a function to clear all past data
 let clearAll = () => {
-  //   empty both of the inputs arrays
-  //   empty the current operator array
-  //   declare the results as 0 again
   inputArr = [];
-  currentOperator = [];
   results = 0;
   digitsArr = [];
   operationsCount = [];
   resultsDisplay.textContent = results;
 };
 
+let startOperating = () => {
+  for (let i = 0; i < operationsCount.length; i++) {
+    // Operate the first two pair of numbers and push it to the beggining
+    inputArr.unshift(operate(inputArr[1], inputArr[0], inputArr[2]));
+    // remove the previous operation
+    inputArr.splice(1, 3);
+    // Update the results
+    results = inputArr[0];
+  }
+};
+
+//--------------EVENT LISTENERS------------//
+
 // Listen for an operation digit
 allOperators.forEach((operator) => {
-  //   Get the id of the pressed operation digit
-  //   push that id to the currentOperator array
   operator.addEventListener("click", function () {
-    // We push the current digitsArr into the first element of the input
+    // Enable the button just when there is a number
     if (digitsArr.length > 0 || inputArr.length === 1) {
+      // Check for odd or even so we can operate more than once
       if (inputArr.length % 2 === 0) {
         inputArr.push(parseInt(digitsArr.join("")));
       }
-
       if (inputArr.length % 2 !== 0) {
         inputArr.push(operator.id);
         operationsCount.push(operator.id);
@@ -110,6 +114,7 @@ allOperators.forEach((operator) => {
 // Listen for an Input from all the number digits
 allDigits.forEach((digit) => {
   digit.addEventListener("click", function () {
+    // Store each digit into an array
     digitsArr.push(digit.textContent);
     resultsDisplay.textContent = digitsArr.join("");
     console.log(operationsCount, inputArr, digitsArr);
@@ -118,13 +123,10 @@ allDigits.forEach((digit) => {
 
 // Listen for the equals key
 equalsKey.addEventListener("click", function () {
+  // Enable the button if there is any operation going on
   if (inputArr.length >= 2 && digitsArr.length > 0) {
     inputArr.push(parseInt(digitsArr.join("")));
-    for (let i = 0; i < operationsCount.length; i++) {
-      inputArr.unshift(operate(inputArr[1], inputArr[0], inputArr[2]));
-      inputArr.splice(1, 3);
-      results = inputArr[0];
-    }
+    startOperating();
     checkForInfinity(results);
     resultsDisplay.textContent = checkForDecimals(results);
     digitsArr = [];
@@ -135,24 +137,23 @@ equalsKey.addEventListener("click", function () {
 
 // Listen for the back key
 backKey.addEventListener("click", function () {
-  if (inputArr.length === 0) {
+  if (digitsArr.length > 0) {
     digitsArr.pop();
-  } else if (inputArr.length === 1) {
-    splitted = inputArr.pop().toString().slice(0, -1);
-    inputArr.push(Number(splitted));
+    resultsDisplay.textContent = parseInt(digitsArr.join(""));
   } else if (inputArr.length > 1) {
+    // Check if there is an operator and Remove it
     if (inputArr.length % 2 === 0 && digitsArr.length === 0) {
       inputArr.pop();
       operationsCount.pop();
+      // Check if there is a second input and remove it
     } else if (inputArr.length % 2 === 0 && digitsArr.length > 0) {
       digitsArr.pop();
     }
   }
-  console.log(operationsCount, inputArr, digitsArr, splitted);
+  console.log(operationsCount, inputArr, digitsArr);
 });
 
 // Listen for a clear button
 clearKey.addEventListener("click", function () {
   clearAll();
 });
-//   call the clear function ()
