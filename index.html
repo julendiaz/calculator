@@ -23,16 +23,29 @@
     <main>
       <div id="super-container">
         <div id="main-container">
-          <div id="display-container">
-            <h2 id="operation-display">0</h2>
-            <h1 id="results">0</h1>
+          <div id="header-container">
+            <div class="speaker-container">
+              <div class="speaker" id="speaker-left"></div>
+            </div>
+            <div id="display-container">
+              <h2 id="operation-display">0</h2>
+              <h1 id="results">0</h1>
+            </div>
+            <div class="speaker-container">
+              <div class="speaker" id="speaker-right"></div>
+            </div>
           </div>
+
           <div id="digits-container">
             <div class="btn-container">
               <button class="btn" id="clear-key">C</button>
             </div>
             <div class="btn-container">
-              <button class="btn" id="record-key">R</button>
+              <button class="btn" id="record-key">
+                <div id="record-circle-one">
+                  <div id="record-mini"></div>
+                </div>
+              </button>
             </div>
             <div class="btn-container">
               <button class="btn" id="piano-key">P</button>

@@ -8,6 +8,7 @@
   --main-white: #dde2ec;
   --main-background: #f1f3f5;
   --main-text-color: #696e82;
+  --record-color: #e36058;
 }
 
 body {
@@ -41,12 +42,48 @@ header h3 {
   padding-top: 1.4em;
 }
 
+#main-container {
+  background-color: var(--main-black);
+  width: 17.25em;
+  height: 29.1em;
+  margin: 0 auto;
+  border-radius: 6px;
+}
+
+#header-container {
+  height: 7.9em;
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  column-gap: 2px;
+}
+.speaker-container {
+  display: flex;
+  align-items: center;
+}
+.speaker {
+  width: 95%;
+  height: 95%;
+  background: #dde2ec;
+  border-radius: 5px;
+  box-shadow: inset 0px -0.9px 0.3px rgba(0, 0, 0, 0.25),
+    inset 0px 0.9px 0.3px #ffffff;
+  margin-top: 0.13em;
+}
+
+#speaker-left {
+  margin-left: 0.2em;
+}
+
 #display-container {
-  width: 17em;
-  height: 6em;
+  width: 100%;
+  height: 6.9em;
   margin: 0 auto;
   padding-top: 1em;
-  background-color: cyan;
+  background-color: rgb(66, 66, 66);
+  color: rgb(236, 226, 226);
+  font-family: var(--main-font);
+  font-weight: 600;
+  font-size: 0.6em;
 }
 
 #display-container h1 {
@@ -62,14 +99,14 @@ header h3 {
 
 #digits-container {
   width: 270px;
-  height: 22em;
+  height: 21em;
   background-color: var(--main-black);
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
   justify-content: center;
-  column-gap: 1.5px;
-  row-gap: 1.5px;
+  column-gap: 2px;
+  row-gap: 2px;
   margin: 0 auto;
 }
 
@@ -81,16 +118,17 @@ header h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 65px;
-  height: 65px;
+  /* width: 65px;
+  height: 65px; */
 }
 
 .btn {
   width: 70%;
   height: 70%;
   border-radius: 50%;
-  display: inline-block;
-  text-align: center;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
   background: #dde2ec;
   box-shadow: 0px 8px 14px -6px rgba(0, 0, 0, 0.4),
     0px -8px 11px -1px rgba(255, 255, 255, 0.51),
@@ -99,7 +137,26 @@ header h3 {
   color: var(--main-text-color);
   border: none;
   font-family: var(--main-font);
-  font-size: 1.8em;
+  font-size: 2.4em;
   font-weight: 200;
   padding: 0;
+  margin-block-start: 0;
+  margin-block-end: 0;
+}
+
+.btn #record-circle-one {
+  background-color: var(--record-color);
+  border-radius: 50%;
+  width: 81%;
+  height: 81%;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.btn #record-mini {
+  background-color: white;
+  border-radius: 50%;
+  width: 20%;
+  height: 20%;
 }
