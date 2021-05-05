@@ -8,6 +8,7 @@ const clearKey = document.querySelector("#clear-key");
 const resultsDisplay = document.querySelector("#results");
 const operationDisplay = document.querySelector("#operation-display");
 const backKey = document.querySelector("#back-key");
+const miniSpeakers = [...document.querySelectorAll(".mini-speakers")];
 
 // Declare an empty first input array
 let inputArr = [];
@@ -175,3 +176,13 @@ backKey.addEventListener("click", function () {
 clearKey.addEventListener("click", function () {
   clearAll();
 });
+
+//-------------HTML APPENDING-----------//
+
+for (let i = 0; i < miniSpeakers.length; i++) {
+  for (let j = 0; j < 135; j++) {
+    const mini = document.createElement("div");
+    mini.classList.add("mini-style");
+    miniSpeakers[i].appendChild(mini);
+  }
+}

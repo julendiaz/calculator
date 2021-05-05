@@ -24,7 +24,7 @@ header {
 header h3 {
   font-family: var(--main-font);
   font-weight: 300;
-  font-size: 0.7em;
+  font-size: 0.9em;
   color: #646464;
 }
 
@@ -36,7 +36,7 @@ header h3 {
     inset 0px 2px 1px rgba(255, 255, 255, 0.89);
   border-radius: 15px;
   width: 20em;
-  height: 30.4em;
+  height: 29.5em;
   display: block;
   margin: 1em auto;
   padding-top: 1.4em;
@@ -45,13 +45,13 @@ header h3 {
 #main-container {
   background-color: var(--main-black);
   width: 17.25em;
-  height: 29.1em;
+  height: 28em;
   margin: 0 auto;
   border-radius: 6px;
 }
 
 #header-container {
-  height: 7.9em;
+  height: 6.8em;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   column-gap: 2px;
@@ -68,6 +68,26 @@ header h3 {
   box-shadow: inset 0px -0.9px 0.3px rgba(0, 0, 0, 0.25),
     inset 0px 0.9px 0.3px #ffffff;
   margin-top: 0.13em;
+  display: grid;
+  place-items: center;
+}
+
+.mini-speakers {
+  width: 70%;
+  height: 80%;
+  display: flex;
+  flex-wrap: wrap;
+  padding-left: 0.2em;
+  padding-top: 0.2em;
+}
+
+.mini-style {
+  background-color: var(--main-black);
+  opacity: 0.8;
+  width: 0.2em;
+  height: 0.2em;
+  border-radius: 50%;
+  margin-right: 0.1em;
 }
 
 #speaker-left {
