@@ -9,34 +9,89 @@
     <link rel="stylesheet" href="css/reset.css" />
     <!-- main css -->
     <link rel="stylesheet" href="css/main.css" />
+    <!-- Typography -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Saira:wght@200;300;600&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div id="display-container">
-      <h2 id="operation-display">0</h2>
-      <h1 id="results">0</h1>
-    </div>
-    <div id="digits-container">
-      <button class="btn digit" id="digit-1">1</button>
-      <button class="btn digit" id="digit-2">2</button>
-      <button class="btn digit" id="digit-3">3</button>
-      <button class="btn digit" id="digit-4">4</button>
-      <button class="btn digit" id="digit-5">5</button>
-      <button class="btn digit" id="digit-6">6</button>
-      <button class="btn digit" id="digit-7">7</button>
-      <button class="btn digit" id="digit-8">8</button>
-      <button class="btn digit" id="digit-9">9</button>
-      <button class="btn digit" id="digit-0">0</button>
-      <button class="btn digit" id="digit-0">.</button>
-    </div>
-    <div id="operations-container">
-      <button class="btn operation" id="add">+</button>
-      <button class="btn operation" id="substract">-</button>
-      <button class="btn operation" id="multiply">*</button>
-      <button class="btn operation" id="divide">/</button>
-      <button class="btn" id="equals-key">=</button>
-      <button class="btn" id="clear-key">clear</button>
-      <button class="btn" id="back-key">back</button>
-    </div>
+    <header>
+      <h3>OP-Calculator - The Numeral Orchestra</h3>
+    </header>
+    <main>
+      <div id="super-container">
+        <div id="main-container">
+          <div id="display-container">
+            <h2 id="operation-display">0</h2>
+            <h1 id="results">0</h1>
+          </div>
+          <div id="digits-container">
+            <div class="btn-container">
+              <button class="btn" id="clear-key">C</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn" id="record-key">R</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn" id="piano-key">P</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn operation" id="divide">/</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-7">7</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-8">8</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-9">9</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn operation" id="multiply">*</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-4">4</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-5">5</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-6">6</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn operation" id="substract">-</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-1">1</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-2">2</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-3">3</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn operation" id="add">+</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-0">0</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn digit" id="digit-0">.</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn" id="back-key">b</button>
+            </div>
+            <div class="btn-container">
+              <button class="btn" id="equals-key">=</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
 
     <!-- main js -->
     <script src="main.js"></script>
