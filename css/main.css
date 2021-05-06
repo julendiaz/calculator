@@ -45,7 +45,7 @@ header h3 {
 #main-container {
   background-color: var(--main-black);
   width: 17.25em;
-  height: 28em;
+  height: 28.1em;
   margin: 0 auto;
   border-radius: 6px;
 }
@@ -109,9 +109,13 @@ header h3 {
 }
 
 #cassette {
-  background-color: pink;
   width: 100%;
   height: 3.3em;
+}
+
+#cassette img {
+  width: 100%;
+  margin-top: -0.3em;
 }
 
 #real-display {
@@ -205,6 +209,17 @@ header h3 {
   padding: 0;
   margin-block-start: 0;
   margin-block-end: 0;
+  cursor: pointer;
+}
+
+.btn:focus {
+  outline: none;
+}
+
+.btn:active {
+  box-shadow: none;
+  border: 0.03em solid #aaadb47a;
+  font-size: 2.35em;
 }
 
 .btn #record-circle-one {
@@ -222,4 +237,48 @@ header h3 {
   border-radius: 50%;
   width: 20%;
   height: 20%;
+}
+
+/* Styling some of the buttons */
+
+#back-key p {
+  margin-top: -0.1em;
+  margin-right: 0.07em;
+  color: #ddb349;
+  font-weight: 300;
+}
+
+#equals-key p {
+  margin-top: -0.15em;
+}
+
+#add p {
+  margin-top: -0.2em;
+}
+
+#substract p {
+  margin-top: -0.1em;
+}
+
+#multiply p {
+  margin-top: -0.2em;
+  font-size: 0.8em;
+}
+
+#divide p {
+  margin-top: -0.2em;
+  font-weight: 300;
+}
+
+#piano-circle {
+  background-color: var(--main-black);
+  width: 81%;
+  height: 81%;
+  border-radius: 50%;
+}
+
+#clear-key {
+  font-size: 1.8em;
+  font-weight: 300;
+  color: #fd974e;
 }
