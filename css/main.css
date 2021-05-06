@@ -50,13 +50,17 @@ header h3 {
   border-radius: 6px;
 }
 
+/* Display Header + Speakers */
+
 #header-container {
-  height: 6.8em;
+  width: 100%;
+  height: 6.9em;
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   column-gap: 2px;
 }
 .speaker-container {
+  height: 100%;
   display: flex;
   align-items: center;
 }
@@ -67,7 +71,8 @@ header h3 {
   border-radius: 5px;
   box-shadow: inset 0px -0.9px 0.3px rgba(0, 0, 0, 0.25),
     inset 0px 0.9px 0.3px #ffffff;
-  margin-top: 0.13em;
+  margin-top: 0.1em;
+  margin-bottom: 0.1em;
   display: grid;
   place-items: center;
 }
@@ -94,28 +99,66 @@ header h3 {
   margin-left: 0.2em;
 }
 
+/* Display Styles */
+
 #display-container {
   width: 100%;
-  height: 6.9em;
+  height: 100%;
   margin: 0 auto;
-  padding-top: 1em;
-  background-color: rgb(66, 66, 66);
   color: rgb(236, 226, 226);
+}
+
+#cassette {
+  background-color: pink;
+  width: 100%;
+  height: 3.3em;
+}
+
+#real-display {
+  width: 83%;
+  height: 2.6em;
+  margin: 0 auto;
+  text-align: right;
+}
+
+#real-display #results {
+  color: white;
   font-family: var(--main-font);
   font-weight: 600;
-  font-size: 0.6em;
+  font-size: 1.3em;
+  margin-top: 0.1em;
 }
 
-#display-container h1 {
-  text-align: center;
-  font-size: 3em;
-  margin-bottom: 1em;
+#real-display #operation-display {
+  color: rgb(214, 214, 214);
+  font-family: var(--main-font);
+  font-weight: 600;
+  font-size: 1em;
 }
 
-#operation-display {
-  color: blue;
-  font-size: 2em;
+/* Color bars details */
+.bar-detail {
+  height: 0.12em;
+  margin-top: 0.12em;
+  margin-left: 0.1em;
+  border-radius: 1em;
 }
+
+#red-detail {
+  background-color: var(--record-color);
+  width: 50%;
+}
+
+#blue-detail {
+  background-color: #58bae3;
+  width: 40%;
+}
+
+#green-detail {
+  background-color: #58e3b1;
+  width: 60%;
+}
+/* All the other buttons */
 
 #digits-container {
   width: 270px;
