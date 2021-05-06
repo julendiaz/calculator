@@ -9,7 +9,7 @@ const resultsDisplay = document.querySelector("#results");
 const operationDisplay = document.querySelector("#operation-display");
 const backKey = document.querySelector("#back-key");
 const miniSpeakers = [...document.querySelectorAll(".mini-speakers")];
-
+const digitZero = document.querySelector("#digit-0");
 // Declare an empty first input array
 let inputArr = [];
 // Declare the result as 0
@@ -20,6 +20,8 @@ let digitsArr = [];
 let displayArr = [];
 // Operations Count
 let operationsCount = [];
+
+digitZero.disabled = false;
 
 //----------MAIN FUNCTIONS--------------//
 
@@ -224,6 +226,15 @@ backKey.addEventListener("click", function () {
 clearKey.addEventListener("click", function () {
   clearAll();
 });
+
+// digitZero.addEventListener("click", function () {
+//   if (digitsArr === 1) {
+//     digitsArr = [];
+//     displayArr = [];
+//   } else if (digitsArr[1] === ".") {
+//     digitZero.disabled = false;
+//   }
+// });
 
 //-------------HTML APPENDING-----------//
 
