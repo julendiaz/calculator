@@ -16,6 +16,8 @@ let inputArr = [];
 let results;
 // Declare each pressed digit
 let digitsArr = [];
+// Declare an array for displaying the operations
+let displayArr = [];
 // Operations Count
 let operationsCount = [];
 
@@ -87,7 +89,11 @@ let clearAll = () => {
   results = 0;
   digitsArr = [];
   operationsCount = [];
+  displayArr = [];
+  operationDisplay.textContent = 0;
   resultsDisplay.textContent = results;
+  resultsDisplay.style.fontSize = "1.6em";
+  operationDisplay.style.fontSize = "1em";
 };
 
 let startOperating = () => {
@@ -98,6 +104,26 @@ let startOperating = () => {
     inputArr.splice(1, 3);
     // Update the results
     results = inputArr[0];
+  }
+};
+
+let checkForTooManyNumbers = () => {
+  if (
+    resultsDisplay.textContent.length > 7 &&
+    resultsDisplay.textContent.length < 9
+  ) {
+    resultsDisplay.style.fontSize = "1em";
+  } else if (resultsDisplay.textContent.length > 11) {
+    clearAll();
+  }
+
+  if (
+    operationDisplay.textContent.length > 10 &&
+    operationDisplay.textContent.length < 14
+  ) {
+    operationDisplay.style.fontSize = "0.8em";
+  } else if (operationDisplay.textContent.length > 14) {
+    clearAll();
   }
 };
 
@@ -114,11 +140,13 @@ allOperators.forEach((operator) => {
       }
       if (inputArr.length % 2 !== 0) {
         inputArr.push(operator.id);
+        displayArr.push(operator.textContent);
+        operationDisplay.textContent = displayArr.join("");
         operationsCount.push(operator.id);
       }
       digitsArr = [];
       results = 0;
-      console.log(operationsCount, inputArr, digitsArr);
+      console.log(operationsCount, inputArr, digitsArr, displayArr);
     }
   });
 });
@@ -130,13 +158,17 @@ allDigits.forEach((digit) => {
     if (inputArr.length === 1) {
       inputArr = [];
       digitsArr.push(digit.textContent);
+      displayArr.push(digit.textContent);
+      operationDisplay.textContent = displayArr.join("");
       resultsDisplay.textContent = digitsArr.join("");
     } else {
       digitsArr.push(digit.textContent);
+      displayArr.push(digit.textContent);
+      operationDisplay.textContent = displayArr.join("");
       resultsDisplay.textContent = digitsArr.join("");
     }
-
-    console.log(operationsCount, inputArr, digitsArr);
+    checkForTooManyNumbers();
+    console.log(operationsCount, inputArr, digitsArr, displayArr);
   });
 });
 
@@ -148,28 +180,44 @@ equalsKey.addEventListener("click", function () {
     startOperating();
     checkForInfinity(results);
     resultsDisplay.textContent = checkForDecimals(results);
+    operationDisplay.textContent = checkForDecimals(results);
+    // Limpiar resultado
+    displayArr[0] = checkForDecimals(results);
+    displayArr.splice(1);
     digitsArr = [];
     operationsCount = [];
-    console.log(operationsCount, inputArr, digitsArr);
+
+    console.log(operationsCount, inputArr, digitsArr, displayArr);
   }
+  checkForTooManyNumbers();
 });
 
 // Listen for the back key
 backKey.addEventListener("click", function () {
-  if (digitsArr.length > 0) {
+  if (digitsArr.length === 1 && displayArr.length === 1) {
+    operationDisplay.textContent = 0;
+    resultsDisplay.textContent = 0;
     digitsArr.pop();
-    resultsDisplay.textContent = parseInt(digitsArr.join(""));
+    displayArr.pop();
+  } else if (digitsArr.length > 0) {
+    digitsArr.pop();
+    displayArr.pop();
+    operationDisplay.textContent = displayArr.join("");
+    resultsDisplay.textContent = digitsArr.join("");
   } else if (inputArr.length > 1) {
     // Check if there is an operator and Remove it
     if (inputArr.length % 2 === 0 && digitsArr.length === 0) {
       inputArr.pop();
       operationsCount.pop();
+      displayArr.pop();
+      operationDisplay.textContent = displayArr.join("");
       // Check if there is a second input and remove it
     } else if (inputArr.length % 2 === 0 && digitsArr.length > 0) {
       digitsArr.pop();
+      displayArr.pop();
     }
   }
-  console.log(operationsCount, inputArr, digitsArr);
+  console.log(operationsCount, inputArr, digitsArr, displayArr);
 });
 
 // Listen for a clear button

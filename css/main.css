@@ -11,6 +11,10 @@
   --record-color: #e36058;
 }
 
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
 body {
   background-color: var(--main-background);
 }
@@ -110,27 +114,28 @@ header h3 {
 
 #cassette {
   width: 100%;
-  height: 3.3em;
-}
-
-#cassette img {
-  width: 100%;
-  margin-top: -0.3em;
+  height: 1.2em;
+  padding-top: 0.2em;
+  padding-left: 0.1em;
 }
 
 #real-display {
   width: 83%;
-  height: 2.6em;
+  height: 3.6em;
   margin: 0 auto;
   text-align: right;
+  padding-top: 1em;
 }
 
 #real-display #results {
   color: white;
   font-family: var(--main-font);
   font-weight: 600;
-  font-size: 1.3em;
-  margin-top: 0.1em;
+  font-size: 1.6em;
+  margin-top: 0.3em;
+  margin-bottom: 0;
+  margin-block-start: 0em;
+  margin-block-end: 0em;
 }
 
 #real-display #operation-display {
@@ -138,6 +143,13 @@ header h3 {
   font-family: var(--main-font);
   font-weight: 600;
   font-size: 1em;
+}
+
+#record-dot {
+  background-color: var(--record-color);
+  border-radius: 50%;
+  width: 0.5em;
+  height: 0.5em;
 }
 
 /* Color bars details */
