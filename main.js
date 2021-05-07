@@ -21,8 +21,6 @@ let displayArr = [];
 // Operations Count
 let operationsCount = [];
 
-digitZero.disabled = false;
-
 //----------MAIN FUNCTIONS--------------//
 
 // Add function for adding numbers (a, b)
@@ -129,6 +127,37 @@ let checkForTooManyNumbers = () => {
   }
 };
 
+let checkForZero = () => {
+  if (digitsArr[0] === "0" && digitsArr[1] === "0") {
+    digitsArr.splice(1);
+    displayArr.splice(1);
+    operationDisplay.textContent = displayArr.join("");
+    resultsDisplay.textContent = digitsArr.join("");
+  } else if (
+    inputArr.length < 2 &&
+    digitsArr[0] === "0" &&
+    digitsArr[1] !== "." &&
+    digitsArr.length > 1
+  ) {
+    digitsArr.shift();
+    displayArr.shift();
+    operationDisplay.textContent = displayArr.join("");
+    resultsDisplay.textContent = digitsArr.join("");
+  }
+
+  if (
+    inputArr.length === 2 &&
+    displayArr[displayArr.length - 2] === "0" &&
+    displayArr[displayArr.length - 1] !== "." &&
+    digitsArr.length < 3
+  ) {
+    digitsArr.shift();
+    displayArr.splice(displayArr.length - 2, 1);
+    resultsDisplay.textContent = digitsArr.join("");
+    operationDisplay.textContent = displayArr.join("");
+  }
+};
+
 //--------------EVENT LISTENERS------------//
 
 // Listen for an operation digit
@@ -169,6 +198,7 @@ allDigits.forEach((digit) => {
       operationDisplay.textContent = displayArr.join("");
       resultsDisplay.textContent = digitsArr.join("");
     }
+    checkForZero();
     checkForTooManyNumbers();
     console.log(operationsCount, inputArr, digitsArr, displayArr);
   });
@@ -226,15 +256,6 @@ backKey.addEventListener("click", function () {
 clearKey.addEventListener("click", function () {
   clearAll();
 });
-
-// digitZero.addEventListener("click", function () {
-//   if (digitsArr === 1) {
-//     digitsArr = [];
-//     displayArr = [];
-//   } else if (digitsArr[1] === ".") {
-//     digitZero.disabled = false;
-//   }
-// });
 
 //-------------HTML APPENDING-----------//
 
