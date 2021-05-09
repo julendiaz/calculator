@@ -114,9 +114,30 @@ header h3 {
 
 #cassette {
   width: 100%;
+  display: flex;
+  justify-content: space-between;
   height: 1.2em;
   padding-top: 0.2em;
   padding-left: 0.1em;
+}
+
+#message {
+  width: 90%;
+  justify-self: flex-end;
+  text-align: center;
+}
+
+.hide {
+  display: none;
+}
+
+#message p {
+  width: 80%;
+  display: block;
+  margin: 0 auto;
+  font-size: 0.5em;
+  font-weight: 600;
+  font-family: var(--main-font);
 }
 
 #real-display {
@@ -148,8 +169,8 @@ header h3 {
 #record-dot {
   background-color: var(--record-color);
   border-radius: 50%;
-  width: 0.5em;
-  height: 0.5em;
+  width: 0.4em;
+  height: 0.4em;
 }
 
 /* Color bars details */

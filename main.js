@@ -10,6 +10,8 @@ const operationDisplay = document.querySelector("#operation-display");
 const backKey = document.querySelector("#back-key");
 const miniSpeakers = [...document.querySelectorAll(".mini-speakers")];
 const digitZero = document.querySelector("#digit-0");
+const digitComa = document.querySelector("#digit-coma");
+const message = document.querySelector("#message-text");
 // Declare an empty first input array
 let inputArr = [];
 // Declare the result as 0
@@ -79,7 +81,7 @@ let checkForDecimals = (num) => {
 let checkForInfinity = (num) => {
   if (!isFinite(num)) {
     // Display a transition into black like a black hole and say something like, hey you created a black hole.
-    operationDisplay.style.backgroundColor = "red";
+    message.textContent = "Please don't create a black hole!";
   }
 };
 
@@ -91,6 +93,8 @@ let clearAll = () => {
   operationsCount = [];
   displayArr = [];
   operationDisplay.textContent = 0;
+  digitComa.disabled = false;
+  message.textContent = "";
   resultsDisplay.textContent = results;
   resultsDisplay.style.fontSize = "1.6em";
   operationDisplay.style.fontSize = "1em";
@@ -158,6 +162,20 @@ let checkForZero = () => {
   }
 };
 
+let checkForComa = () => {
+  if (digitsArr.includes(".")) {
+    digitComa.disabled = true;
+  }
+};
+
+let checkForNewNum = () => {
+  if (typeof displayArr[0] === "number" && displayArr.length === 2) {
+    displayArr.shift();
+    operationDisplay.textContent = displayArr.join("");
+    resultsDisplay.textContent = digitsArr.join("");
+  }
+};
+
 //--------------EVENT LISTENERS------------//
 
 // Listen for an operation digit
@@ -177,6 +195,7 @@ allOperators.forEach((operator) => {
       }
       digitsArr = [];
       results = 0;
+      digitComa.disabled = false;
       console.log(operationsCount, inputArr, digitsArr, displayArr);
     }
   });
@@ -198,8 +217,10 @@ allDigits.forEach((digit) => {
       operationDisplay.textContent = displayArr.join("");
       resultsDisplay.textContent = digitsArr.join("");
     }
+    checkForComa();
     checkForZero();
     checkForTooManyNumbers();
+    checkForNewNum();
     console.log(operationsCount, inputArr, digitsArr, displayArr);
   });
 });
@@ -208,7 +229,7 @@ allDigits.forEach((digit) => {
 equalsKey.addEventListener("click", function () {
   // Enable the button if there is any operation going on
   if (inputArr.length >= 2 && digitsArr.length > 0) {
-    inputArr.push(parseInt(digitsArr.join("")));
+    inputArr.push(parseFloat(digitsArr.join("")));
     startOperating();
     checkForInfinity(results);
     resultsDisplay.textContent = checkForDecimals(results);
