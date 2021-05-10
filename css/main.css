@@ -318,3 +318,17 @@ header h3 {
 .hide {
   display: none;
 }
+
+/* footer */
+footer {
+  width: 80%;
+  height: 3em;
+  margin: 3.3em auto 1em auto;
+  text-align: center;
+}
+footer h3 {
+  font-family: var(--main-font);
+  font-weight: 300;
+  font-size: 0.9em;
+  color: var(--main-text-color);
+}
