@@ -15,6 +15,10 @@ Go to the [Live Preview](#);
   - [Mindmap](#mindmap)
   - [Useful sources](#useful-sources)
 - [Approaches](#approaches)
+  - [Main Operator](#main-operator)
+  - [Clear All](#clear-all)
+  - [Check Decimals](#check-decimals)
+  - [Keyboard Support](#keyboard-support)
 - [Additional Improvements](#additional-improvements)
 - [Attribution](#attribution)
 - [Contact](#contact)
@@ -27,12 +31,12 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
 
 ## The Challenge
 
-- [ ] Build a basic web-browser calculator
-- [ ] Put in practice array methods
-- [ ] Create a basic HTML calculator with buttons for each digit
-- [ ] Come up with a solution for storing the values for each operation
-- [ ] Implement the OP-1 Inspiration design
-- [ ] Have fun
+- [x] Build a basic web-browser calculator
+- [x] Put in practice array methods
+- [x] Create a basic HTML calculator with buttons for each digit
+- [x] Come up with a solution for storing the values for each operation
+- [x] Implement the OP-1 Inspiration design
+- [x] Have fun
 
 ## Key Features
 
@@ -47,6 +51,7 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
 - [x] Store multiple operations at the same time
 - [x] Round integers so the decimals doesn't overrun the display
 - [x] Error message if the user tries to divide by 0
+- [x] Keyboard Support
 
 ## My Process
 
@@ -65,20 +70,8 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
   - **How to store multiple operations?**
   - **How to round integers?**
   - **how to get the operator argument?**
-
-<!-- Questions while coding -->
-
 - **How to store more than one value like 12 + 33 for example?**
 - **How could we store all inputs in one single arr?**
-  - input arr
-  - everytime a button is pressed, it adds that text content to the array
-  - [1, 2, +, 3, 3, /, 2, +, 120]
-  - join -> "12+33"
-  - We would need to match with regex each operation
-  - how get the index of each operation
-  - tell the program in case is add, then take all the numbers before, assign it as a, and all the numbers after that and assign them as b
-  - How to get the numbers before and after each operation
-  - make a for loop to operate the chunks of the input
 
 ### Pseudocode
 
@@ -142,13 +135,21 @@ After finishing up the pseudocode method, I thought that some parts were a bit c
 - [onclick Event](https://www.w3schools.com/jsref/event_onclick.asp);
 - [toPresicion Method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/toPrecision)
 - [How to empty an array](https://stackoverflow.com/questions/1232040/how-do-i-empty-an-array-in-javascript)
+- [Spread Operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Spread_syntax)
+- [Arrow Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+- [Switch vs If else](https://medium.com/@michellekwong2/switch-vs-if-else-1d458e7b0711#:~:text=For%20switch%2C%20the%20expression%20inside,point%20type%20or%20boolean%20type.)
+- [Set timeout](https://www.w3schools.com/jsref/met_win_settimeout.asp)
+- [Unshift Method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift)
+- [ParseInt](https://www.w3schools.com/jsref/jsref_parseint.asp)
+- [To Fixed Decimals](https://www.w3schools.com/jsref/jsref_tofixed.asp)
+- [Event Code](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code)
 
 ## Approaches
 
 ## Additional Improvements
 
-- [ ] Add a Backspace button
-- [ ] Add keybord support
+- [x] Add a Backspace button
+- [x] Add keybord support
 - [ ] Make it musical
 
 ## Attribution
