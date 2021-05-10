@@ -252,6 +252,12 @@ header h3 {
   font-size: 2.35em;
 }
 
+.active {
+  box-shadow: none;
+  border: 0.03em solid #aaadb47a;
+  font-size: 2.35em;
+}
+
 .btn #record-circle-one {
   background-color: var(--record-color);
   border-radius: 50%;
@@ -286,7 +292,7 @@ header h3 {
   margin-top: -0.2em;
 }
 
-#substract p {
+#subtract p {
   margin-top: -0.1em;
 }
 

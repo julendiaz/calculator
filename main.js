@@ -1,8 +1,8 @@
 "use strict";
 
 // ---------SELECTORS------------//
-const allDigits = document.querySelectorAll(".digit");
-const allOperators = document.querySelectorAll(".operation");
+const allDigits = [...document.querySelectorAll(".digit")];
+const allOperators = [...document.querySelectorAll(".operation")];
 const equalsKey = document.querySelector("#equals-key");
 const clearKey = document.querySelector("#clear-key");
 const resultsDisplay = document.querySelector("#results");
@@ -24,7 +24,7 @@ let operationsCount = [];
 
 // Simple math operations
 let add = (a, b) => a + b;
-let substract = (a, b) => a - b;
+let subtract = (a, b) => a - b;
 let multiply = (a, b) => a * b;
 let divide = (a, b) => a / b;
 
@@ -34,8 +34,8 @@ let operate = (operator, x, y) => {
     case "add":
       return add(x, y);
       break;
-    case "substract":
-      return substract(x, y);
+    case "subtract":
+      return subtract(x, y);
       break;
     case "multiply":
       return multiply(x, y);
@@ -44,6 +44,14 @@ let operate = (operator, x, y) => {
       return divide(x, y);
       break;
   }
+};
+
+let clickIt = (digit) => {
+  digit.click();
+  digit.classList.add("active");
+  setTimeout(function () {
+    digit.classList.remove("active");
+  }, 150);
 };
 
 let startOperating = () => {
@@ -283,6 +291,37 @@ backKey.addEventListener("click", function () {
 // Listen for a clear button
 clearKey.addEventListener("click", function () {
   clearAll();
+});
+
+// Keyboard support feature
+document.addEventListener("keydown", function (event) {
+  // Get the event code to match with digits and operators
+  let numCode = event.code[event.code.length - 1];
+  let operatorCode = event.code.slice(6).toLowerCase();
+
+  switch (event.code) {
+    case "NumpadDecimal":
+      clickIt(allDigits[10]);
+      break;
+    case "NumpadEnter":
+      clickIt(equalsKey);
+      break;
+    case "Backspace":
+      clickIt(backKey);
+      break;
+  }
+  // Itinerate through all the digits and click the one pressed
+  for (let i = 0; i < allDigits.length; i++) {
+    if (allDigits[i].textContent === numCode) {
+      clickIt(allDigits[i]);
+    }
+  }
+  // Itinerate through all the Operations and click the one pressed
+  for (let i = 0; i < allOperators.length; i++) {
+    if (allOperators[i].id === operatorCode) {
+      clickIt(allOperators[i]);
+    }
+  }
 });
 
 //-------------HTML APPENDING-----------//
