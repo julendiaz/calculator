@@ -40,18 +40,17 @@ The main purpose is to make it work with basic operations. Nevertheless, I will 
 
 ## Key Features
 
-- [x] Be able to operate basic math operations
-  - [x] add
-  - [x] substract
-  - [x] multiply
-  - [x] divide
-- [x] Equals key for displaying the results
-- [x] Clear button to reset operations
-- [x] Display to showcase the operations
-- [x] Store multiple operations at the same time
-- [x] Round integers so the decimals doesn't overrun the display
-- [x] Error message if the user tries to divide by 0
-- [x] Keyboard Support
+- Be able to operate basic math operations
+  - add
+  - substract
+  - multiply
+  - divide
+- Keyboard Support
+- Equals key for displaying the results
+- Clear button to reset operations
+- Store multiple operations at the same time
+- Round integers so the decimals doesn't overrun the display
+- Error message if the user tries to divide by 0
 
 ## My Process
 
@@ -145,6 +144,149 @@ After finishing up the pseudocode method, I thought that some parts were a bit c
 - [Event Code](https://developer.mozilla.org/en-US/docs/Web/API/KeyboardEvent/code)
 
 ## Approaches
+
+### Main Operator
+
+The first big challenge from this project was to come up with a solution for storing each operation. After spending a few hours dancing with different approaches, I went for the common way of using callback functions to operate a single pair of numbers.
+
+with the help of the switch statement, it all looks more readable and simpler.
+
+```javascript
+// Main function for operating a pair of numbers
+let operate = (operator, x, y) => {
+  switch (operator) {
+    case "add":
+      return add(x, y);
+      break;
+    case "subtract":
+      return subtract(x, y);
+      break;
+    case "multiply":
+      return multiply(x, y);
+      break;
+    case "divide":
+      return divide(x, y);
+      break;
+  }
+};
+```
+
+This is where the complicated stuff comes in, I had to try and keep storing only one operation at a time, and then get rid of the previous ones. I used the splice method for that.
+
+```javascript
+let startOperating = () => {
+  for (let i = 0; i < operationsCount.length; i++) {
+    // Operate the first two pair of numbers and push it to the beggining
+    inputArr.unshift(operate(inputArr[1], inputArr[0], inputArr[2]));
+    // remove the previous operation
+    inputArr.splice(1, 3);
+    // Update the results
+    results = inputArr[0];
+  }
+};
+```
+
+So as a final step, I just had to call this startOperating function after the user presses the equals key. And BOOM! operation done.
+
+### Clear All
+
+I do not really know why, but this feature was one of the most satisfactory implementations. It is really simple, but at the same time, powerful enough to reset all variables.
+
+```javascript
+let clearAll = () => {
+  inputArr = [];
+  results = 0;
+  digitsArr = [];
+  operationsCount = [];
+  displayArr = [];
+  operationDisplay.textContent = 0;
+  digitComa.disabled = false;
+  message.textContent = "";
+  resultsDisplay.textContent = results;
+  resultsDisplay.style.fontSize = "1.6em";
+  operationDisplay.style.fontSize = "1em";
+};
+```
+
+### Check Decimals
+
+Adding the coma for the decimals was something that I thought it would be easier. Nevertheless, I had so much fun trying to come up with a 'clean' way of displaying them.
+
+First, we need to count the decimals in each result. For that reason, converting it to string and splitting it became necessary.
+
+```javascript
+let countDecimals = (num) => {
+  // Convert to String
+  let numStr = String(num);
+  // String Contains Decimal
+  if (numStr.includes(".")) {
+    return numStr.split(".")[1].length;
+  }
+  // String Does Not Contain Decimal
+  return 0;
+};
+```
+
+Afterwards, knowing the length of the decimals, we can just tell the program to display the result with a fixed number of decimals.
+
+```javascript
+let checkForDecimals = (num) => {
+  if (countDecimals(num) === 1) {
+    return num.toFixed(1);
+  } else if (countDecimals(num) === 2) {
+    return num.toFixed(2);
+  } else if (countDecimals(num) >= 3) {
+    return num.toFixed(3);
+  } else {
+    return num;
+  };
+```
+
+### Keyboard Support
+
+For implementing the keyboard support I wanted to come up with a way of using the template literal or something similar so I could simplify the code.
+
+That's when the event.code came in handy for the job. Using a few for loops and targeting the rest of buttons like equals, coma or back key was enough for solving it.
+
+```javascript
+// Keyboard support feature
+document.addEventListener("keydown", function (event) {
+  // Get the event code to match with digits and operators
+  let numCode = event.code[event.code.length - 1];
+  let operatorCode = event.code.slice(6).toLowerCase();
+  if (event.code === "NumpadDecimal") {
+    clickIt(allDigits[10]);
+  } else if (event.code === "NumpadEnter") {
+    clickIt(equalsKey);
+  } else if (event.code === "Backspace") {
+    clickIt(backKey);
+  }
+  // Itinerate through all the digits and click the one pressed
+  for (let i = 0; i < allDigits.length; i++) {
+    if (allDigits[i].textContent === numCode) {
+      clickIt(allDigits[i]);
+    }
+  }
+  // Itinerate through all the Operations and click the one pressed
+  for (let i = 0; i < allOperators.length; i++) {
+    if (allOperators[i].id === operatorCode) {
+      clickIt(allOperators[i]);
+    }
+  }
+});
+```
+
+If you are wondering about the clickIt function, I added it because of the DRY principle so I was not repeating myself a lot.
+
+```javascript
+let clickIt = (digit) => {
+  digit.click();
+  digit.classList.add("active");
+  setTimeout(function () {
+    digit.classList.remove("active");
+  }, 150);
+};
+```
 
 ## Additional Improvements
 
