@@ -12,76 +12,48 @@ const miniSpeakers = [...document.querySelectorAll(".mini-speakers")];
 const digitZero = document.querySelector("#digit-0");
 const digitComa = document.querySelector("#digit-coma");
 const message = document.querySelector("#message-text");
-// Declare an empty first input array
+
+//-----------STARTER VARIABLES-------------//
 let inputArr = [];
-// Declare the result as 0
 let results;
-// Declare each pressed digit
 let digitsArr = [];
-// Declare an array for displaying the operations
 let displayArr = [];
-// Operations Count
 let operationsCount = [];
 
 //----------MAIN FUNCTIONS--------------//
 
-// Add function for adding numbers (a, b)
-let add = (a, b) => {
-  return a + b;
-};
-// Add function for substract (a, b)
-let substract = (a, b) => {
-  return a - b;
-};
-// Add function for multiply (a, b)
-let multiply = (a, b) => {
-  return a * b;
-};
-// Add function for divide (a, b)
-let divide = (a, b) => {
-  return a / b;
-};
+// Simple math operations
+let add = (a, b) => a + b;
+let substract = (a, b) => a - b;
+let multiply = (a, b) => a * b;
+let divide = (a, b) => a / b;
 
-// Create function operation with (operator, firstInput, secondInput)
+// Main function for operating a pair of numbers
 let operate = (operator, x, y) => {
-  if (operator === "add") {
-    return add(x, y);
-  } else if (operator === "substract") {
-    return substract(x, y);
-  } else if (operator === "multiply") {
-    return multiply(x, y);
-  } else if (operator === "divide") {
-    return divide(x, y);
+  switch (operator) {
+    case "add":
+      return add(x, y);
+      break;
+    case "substract":
+      return substract(x, y);
+      break;
+    case "multiply":
+      return multiply(x, y);
+      break;
+    case "divide":
+      return divide(x, y);
+      break;
   }
 };
 
-let decimalCount = (num) => {
-  // Convert to String
-  let numStr = String(num);
-  // String Contains Decimal
-  if (numStr.includes(".")) {
-    return numStr.split(".")[1].length;
-  }
-  // String Does Not Contain Decimal
-  return 0;
-};
-
-let checkForDecimals = (num) => {
-  if (decimalCount(num) === 1) {
-    return num.toFixed(1);
-  } else if (decimalCount(num) === 2) {
-    return num.toFixed(2);
-  } else if (decimalCount(num) >= 3) {
-    return num.toFixed(3);
-  } else {
-    return num;
-  }
-};
-
-let checkForInfinity = (num) => {
-  if (!isFinite(num)) {
-    // Display a transition into black like a black hole and say something like, hey you created a black hole.
-    message.textContent = "Please don't create a black hole!";
+let startOperating = () => {
+  for (let i = 0; i < operationsCount.length; i++) {
+    // Operate the first two pair of numbers and push it to the beggining
+    inputArr.unshift(operate(inputArr[1], inputArr[0], inputArr[2]));
+    // remove the previous operation
+    inputArr.splice(1, 3);
+    // Update the results
+    results = inputArr[0];
   }
 };
 
@@ -100,15 +72,52 @@ let clearAll = () => {
   operationDisplay.style.fontSize = "1em";
 };
 
-let startOperating = () => {
-  for (let i = 0; i < operationsCount.length; i++) {
-    // Operate the first two pair of numbers and push it to the beggining
-    inputArr.unshift(operate(inputArr[1], inputArr[0], inputArr[2]));
-    // remove the previous operation
-    inputArr.splice(1, 3);
-    // Update the results
-    results = inputArr[0];
+let countDecimals = (num) => {
+  // Convert to String
+  let numStr = String(num);
+  // String Contains Decimal
+  if (numStr.includes(".")) {
+    return numStr.split(".")[1].length;
   }
+  // String Does Not Contain Decimal
+  return 0;
+};
+
+let checkForDecimals = (num) => {
+  if (countDecimals(num) === 1) {
+    return num.toFixed(1);
+  } else if (countDecimals(num) === 2) {
+    return num.toFixed(2);
+  } else if (countDecimals(num) >= 3) {
+    return num.toFixed(3);
+    // Check for unwanted zero's when fixing the decimals to three
+  } else if (
+    countDecimals(num) >= 3 &&
+    String(num.toFixed(3))[String(num.toFixed(3)).length - 1] === "0"
+  ) {
+    return num.toFixed(2);
+  } else if (
+    countDecimals(num) >= 3 &&
+    String(num.toFixed(3))[String(num.toFixed(3)).length - 1] === "0" &&
+    String(num.toFixed(3))[String(num.toFixed(3)).length - 2] === "0"
+  ) {
+    return num.toFixed(1);
+    // Return number if there are no decimals
+  } else {
+    return num;
+  }
+};
+
+let checkForInfinity = (num) => {
+  if (!isFinite(num)) {
+    // Display a transition into black like a black hole and say something like, hey you created a black hole.
+    message.textContent = "Please don't create a black hole!";
+  }
+};
+
+let showResults = () => {
+  operationDisplay.textContent = displayArr.join("");
+  resultsDisplay.textContent = digitsArr.join("");
 };
 
 let checkForTooManyNumbers = () => {
@@ -132,11 +141,11 @@ let checkForTooManyNumbers = () => {
 };
 
 let checkForZero = () => {
+  // Check for two consecutive zeros at the beginning
   if (digitsArr[0] === "0" && digitsArr[1] === "0") {
     digitsArr.splice(1);
     displayArr.splice(1);
-    operationDisplay.textContent = displayArr.join("");
-    resultsDisplay.textContent = digitsArr.join("");
+    showResults();
   } else if (
     inputArr.length < 2 &&
     digitsArr[0] === "0" &&
@@ -145,10 +154,9 @@ let checkForZero = () => {
   ) {
     digitsArr.shift();
     displayArr.shift();
-    operationDisplay.textContent = displayArr.join("");
-    resultsDisplay.textContent = digitsArr.join("");
+    showResults();
   }
-
+  // Check for consecutive zero's after the first operation
   if (
     inputArr.length === 2 &&
     displayArr[displayArr.length - 2] === "0" &&
@@ -157,8 +165,7 @@ let checkForZero = () => {
   ) {
     digitsArr.shift();
     displayArr.splice(displayArr.length - 2, 1);
-    resultsDisplay.textContent = digitsArr.join("");
-    operationDisplay.textContent = displayArr.join("");
+    showResults();
   }
 };
 
@@ -167,13 +174,17 @@ let checkForComa = () => {
     digitComa.disabled = true;
   }
 };
-
+// When the user gets a result, but wants to start a new operation without clear
 let checkForNewNum = () => {
   if (typeof displayArr[0] === "number" && displayArr.length === 2) {
     displayArr.shift();
-    operationDisplay.textContent = displayArr.join("");
-    resultsDisplay.textContent = digitsArr.join("");
+    showResults();
   }
+};
+// Remove the last number when pressing the goBack key
+let popLastDigit = () => {
+  digitsArr.pop();
+  displayArr.pop();
 };
 
 //--------------EVENT LISTENERS------------//
@@ -204,18 +215,16 @@ allOperators.forEach((operator) => {
 // Listen for an Input from all the number digits
 allDigits.forEach((digit) => {
   digit.addEventListener("click", function () {
-    // Store each digit into an array
+    // Check if there was an operation before
     if (inputArr.length === 1) {
       inputArr = [];
       digitsArr.push(digit.textContent);
       displayArr.push(digit.textContent);
-      operationDisplay.textContent = displayArr.join("");
-      resultsDisplay.textContent = digitsArr.join("");
+      showResults();
     } else {
       digitsArr.push(digit.textContent);
       displayArr.push(digit.textContent);
-      operationDisplay.textContent = displayArr.join("");
-      resultsDisplay.textContent = digitsArr.join("");
+      showResults();
     }
     checkForComa();
     checkForZero();
@@ -234,7 +243,7 @@ equalsKey.addEventListener("click", function () {
     checkForInfinity(results);
     resultsDisplay.textContent = checkForDecimals(results);
     operationDisplay.textContent = checkForDecimals(results);
-    // Limpiar resultado
+    // Clean up the results
     displayArr[0] = checkForDecimals(results);
     displayArr.splice(1);
     digitsArr = [];
@@ -248,15 +257,13 @@ equalsKey.addEventListener("click", function () {
 // Listen for the back key
 backKey.addEventListener("click", function () {
   if (digitsArr.length === 1 && displayArr.length === 1) {
+    // Display a zero if user gets rid of all numbers
     operationDisplay.textContent = 0;
     resultsDisplay.textContent = 0;
-    digitsArr.pop();
-    displayArr.pop();
+    popLastDigit();
   } else if (digitsArr.length > 0) {
-    digitsArr.pop();
-    displayArr.pop();
-    operationDisplay.textContent = displayArr.join("");
-    resultsDisplay.textContent = digitsArr.join("");
+    popLastDigit();
+    showResults();
   } else if (inputArr.length > 1) {
     // Check if there is an operator and Remove it
     if (inputArr.length % 2 === 0 && digitsArr.length === 0) {
@@ -266,8 +273,7 @@ backKey.addEventListener("click", function () {
       operationDisplay.textContent = displayArr.join("");
       // Check if there is a second input and remove it
     } else if (inputArr.length % 2 === 0 && digitsArr.length > 0) {
-      digitsArr.pop();
-      displayArr.pop();
+      popLastDigit();
     }
   }
   console.log(operationsCount, inputArr, digitsArr, displayArr);
@@ -280,6 +286,7 @@ clearKey.addEventListener("click", function () {
 
 //-------------HTML APPENDING-----------//
 
+// Insert the little dots inside the speakers
 for (let i = 0; i < miniSpeakers.length; i++) {
   for (let j = 0; j < 135; j++) {
     const mini = document.createElement("div");
