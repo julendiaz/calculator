@@ -128,6 +128,7 @@ let checkForTooManyNumbers = () => {
     resultsDisplay.style.fontSize = "1em";
   } else if (resultsDisplay.textContent.length > 11) {
     clearAll();
+    message.textContent = "wow wow wow please don't get excited!";
   }
 
   if (

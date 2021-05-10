@@ -19,6 +19,8 @@ body {
   background-color: var(--main-background);
 }
 
+/* Header text */
+
 header {
   width: 80%;
   height: 3em;
@@ -29,7 +31,7 @@ header h3 {
   font-family: var(--main-font);
   font-weight: 300;
   font-size: 0.9em;
-  color: #646464;
+  color: var(--main-text-color);
 }
 
 /* Main Calculator */
@@ -117,18 +119,15 @@ header h3 {
   display: flex;
   justify-content: space-between;
   height: 1.2em;
-  padding-top: 0.2em;
-  padding-left: 0.1em;
+  padding-top: 0.3em;
+  padding-left: 0.2em;
 }
 
 #message {
   width: 90%;
   justify-self: flex-end;
-  text-align: center;
-}
-
-.hide {
-  display: none;
+  text-align: right;
+  padding-top: 0.2em;
 }
 
 #message p {
@@ -176,7 +175,7 @@ header h3 {
 /* Color bars details */
 .bar-detail {
   height: 0.12em;
-  margin-top: 0.12em;
+  margin-top: 0.07em;
   margin-left: 0.1em;
   border-radius: 1em;
 }
@@ -218,8 +217,6 @@ header h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  /* width: 65px;
-  height: 65px; */
 }
 
 .btn {
@@ -314,4 +311,10 @@ header h3 {
   font-size: 1.8em;
   font-weight: 300;
   color: #fd974e;
+}
+
+/* Common classes */
+
+.hide {
+  display: none;
 }
