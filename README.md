@@ -1,8 +1,8 @@
 # Calculator - The Odin Project
 
-<!-- ![Frame 1portadagithub](images/gitportada.png) -->
+![Frame 1portadagithub](assets/images/portada.png)
 
-Go to the [Live Preview](#);
+Go to the [Live Preview](https://shifujulen.github.io/calculator/);
 
 ## Table of contents
 
@@ -127,7 +127,9 @@ Obviously, after coding for a while, I had to re-arrange blocks and come up with
 
 After finishing up the pseudocode method, I thought that some parts were a bit confusing to digest for my current level. That's why I tried to express each solution and function into a simple mindmap. This way I could visualize all the co-relations between variables and organize all of the ideas.
 
-![Mindmap](#)
+This is the first solution I came up with before any code was written. Even though it was a good start and helped me a lot in visualizing the funcion callings, I had to re-arrange lots of thinks in order to work it out.
+
+![Mindmap](assets/images/mindmap.PNG)
 
 ### Useful Sources
 
@@ -296,7 +298,8 @@ let clickIt = (digit) => {
 
 ## Attribution
 
-- Designed and Developed by Julen Diaz
+- Design Inspiration comes from the OP-1, crafted by [Teenage Engineering](https://teenage.engineering/products/op-1)
+- Developed by Julen Diaz
 
 ## Contact
 
