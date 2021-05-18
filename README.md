@@ -295,6 +295,7 @@ let clickIt = (digit) => {
 - [x] Add a Backspace button
 - [x] Add keybord support
 - [ ] Make it musical
+  - [ ] Add vinyl sound to clearAll
 
 ## Attribution
 

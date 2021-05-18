@@ -265,6 +265,7 @@ allDigits.forEach((digit) => {
     checkForZero();
     checkForTooManyNumbers();
     checkForNewNum();
+    playNote(digit);
     console.log(operationsCount, inputArr, digitsArr, displayArr);
   });
 });
@@ -329,3 +330,12 @@ for (let i = 0; i < miniSpeakers.length; i++) {
     miniSpeakers[i].appendChild(mini);
   }
 }
+
+//-------------MAKE IT MUSICAL-----------//
+
+let playNote = (digit) => {
+  const noteAudio = document.getElementById(digit.dataset.note);
+  noteAudio.currentTime = 0;
+  noteAudio.play();
+  console.log(noteAudio);
+};
