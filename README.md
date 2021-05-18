@@ -296,6 +296,9 @@ let clickIt = (digit) => {
 - [x] Add keybord support
 - [ ] Make it musical
   - [ ] Add vinyl sound to clearAll
+  - [ ] Add musical icon to the piano button
+  - [ ] Toggle musical or not musical with the piano button
+  - [ ] Add different backup to piano depending on operation
 
 ## Attribution
 
