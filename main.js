@@ -54,14 +54,6 @@ let operate = (operator, x, y) => {
   }
 };
 
-// let clickIt = (pad) => {
-//   pad.click();
-//   pad.classList.add("active");
-//   setTimeout(function () {
-//     pad.classList.remove("active");
-//   }, 150);
-// };
-
 let startOperating = () => {
   for (let i = 0; i < operationsCount.length; i++) {
     // Operate the first two pair of numbers and push it to the beggining
@@ -304,34 +296,6 @@ backKey.addEventListener("click", function () {
 clearKey.addEventListener("click", function () {
   clearAll();
 });
-
-// // Keyboard support feature
-// document.addEventListener("keydown", function (event) {
-//   // Get the event code to match with digits and operators
-//   let numCode = event.code[event.code.length - 1];
-//   let operatorCode = event.code.slice(6).toLowerCase();
-//   if (event.code === "NumpadDecimal") {
-//     clickIt(allDigits[10]);
-//   } else if (event.code === "NumpadEnter") {
-//     clickIt(equalsKey);
-//     equalsResults();
-//   } else if (event.code === "Backspace") {
-//     clickIt(backKey);
-//   }
-//   // Itinerate through all the digits and click the one pressed
-//   for (let i = 0; i < allDigits.length; i++) {
-//     if (allDigits[i].textContent === numCode) {
-//       clickIt(allDigits[i]);
-//     }
-//   }
-//   // Itinerate through all the Operations and click the one pressed
-//   for (let i = 0; i < allOperators.length; i++) {
-//     if (allOperators[i].id === operatorCode) {
-//       clickIt(allOperators[i]);
-//     }
-//   }
-//   console.log(event.code);
-// });
 
 //-------------HTML APPENDING-----------//
 
