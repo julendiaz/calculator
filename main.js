@@ -54,13 +54,13 @@ let operate = (operator, x, y) => {
   }
 };
 
-let clickIt = (pad) => {
-  pad.click();
-  pad.classList.add("active");
-  setTimeout(function () {
-    pad.classList.remove("active");
-  }, 150);
-};
+// let clickIt = (pad) => {
+//   pad.click();
+//   pad.classList.add("active");
+//   setTimeout(function () {
+//     pad.classList.remove("active");
+//   }, 150);
+// };
 
 let startOperating = () => {
   for (let i = 0; i < operationsCount.length; i++) {
@@ -270,17 +270,6 @@ equalsKey.addEventListener("click", function () {
   // Enable the button if there is any operation going on
   if (inputArr.length >= 2 && digitsArr.length > 0) {
     equalsResults();
-    // inputArr.push(parseFloat(digitsArr.join("")));
-    // startOperating();
-    // checkForInfinity(results);
-    // resultsDisplay.textContent = checkForDecimals(results);
-    // operationDisplay.textContent = checkForDecimals(results);
-    // // Clean up the results
-    // displayArr[0] = checkForDecimals(results);
-    // displayArr.splice(1);
-    // digitsArr = [];
-    // operationsCount = [];
-
     console.log(operationsCount, inputArr, digitsArr, displayArr);
   }
   checkForTooManyNumbers();
@@ -316,33 +305,33 @@ clearKey.addEventListener("click", function () {
   clearAll();
 });
 
-// Keyboard support feature
-document.addEventListener("keydown", function (event) {
-  // Get the event code to match with digits and operators
-  let numCode = event.code[event.code.length - 1];
-  let operatorCode = event.code.slice(6).toLowerCase();
-  if (event.code === "NumpadDecimal") {
-    clickIt(allDigits[10]);
-  } else if (event.code === "NumpadEnter") {
-    clickIt(equalsKey);
-    equalsResults();
-  } else if (event.code === "Backspace") {
-    clickIt(backKey);
-  }
-  // Itinerate through all the digits and click the one pressed
-  for (let i = 0; i < allDigits.length; i++) {
-    if (allDigits[i].textContent === numCode) {
-      clickIt(allDigits[i]);
-    }
-  }
-  // Itinerate through all the Operations and click the one pressed
-  for (let i = 0; i < allOperators.length; i++) {
-    if (allOperators[i].id === operatorCode) {
-      clickIt(allOperators[i]);
-    }
-  }
-  console.log(event.code);
-});
+// // Keyboard support feature
+// document.addEventListener("keydown", function (event) {
+//   // Get the event code to match with digits and operators
+//   let numCode = event.code[event.code.length - 1];
+//   let operatorCode = event.code.slice(6).toLowerCase();
+//   if (event.code === "NumpadDecimal") {
+//     clickIt(allDigits[10]);
+//   } else if (event.code === "NumpadEnter") {
+//     clickIt(equalsKey);
+//     equalsResults();
+//   } else if (event.code === "Backspace") {
+//     clickIt(backKey);
+//   }
+//   // Itinerate through all the digits and click the one pressed
+//   for (let i = 0; i < allDigits.length; i++) {
+//     if (allDigits[i].textContent === numCode) {
+//       clickIt(allDigits[i]);
+//     }
+//   }
+//   // Itinerate through all the Operations and click the one pressed
+//   for (let i = 0; i < allOperators.length; i++) {
+//     if (allOperators[i].id === operatorCode) {
+//       clickIt(allOperators[i]);
+//     }
+//   }
+//   console.log(event.code);
+// });
 
 //-------------HTML APPENDING-----------//
 
