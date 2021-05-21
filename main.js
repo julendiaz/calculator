@@ -22,6 +22,14 @@ let operationsCount = [];
 
 //----------MAIN FUNCTIONS--------------//
 
+let playNote = (digit) => {
+  const noteAudio = document.getElementById(digit.dataset.note);
+  noteAudio.currentTime = 0;
+  noteAudio.play();
+  console.log(noteAudio);
+};
+4;
+
 // Simple math operations
 let add = (a, b) => a + b;
 let subtract = (a, b) => a - b;
@@ -46,11 +54,11 @@ let operate = (operator, x, y) => {
   }
 };
 
-let clickIt = (digit) => {
-  digit.click();
-  digit.classList.add("active");
+let clickIt = (pad) => {
+  pad.click();
+  pad.classList.add("active");
   setTimeout(function () {
-    digit.classList.remove("active");
+    pad.classList.remove("active");
   }, 150);
 };
 
@@ -128,6 +136,19 @@ let showResults = () => {
   resultsDisplay.textContent = digitsArr.join("");
 };
 
+let equalsResults = () => {
+  inputArr.push(parseFloat(digitsArr.join("")));
+  startOperating();
+  checkForInfinity(results);
+  resultsDisplay.textContent = checkForDecimals(results);
+  operationDisplay.textContent = checkForDecimals(results);
+  // Clean up the results
+  displayArr[0] = checkForDecimals(results);
+  displayArr.splice(1);
+  digitsArr = [];
+  operationsCount = [];
+};
+
 let checkForTooManyNumbers = () => {
   if (
     resultsDisplay.textContent.length > 7 &&
@@ -198,32 +219,6 @@ let popLastDigit = () => {
 
 //--------------EVENT LISTENERS------------//
 
-// Keyboard support feature
-document.addEventListener("keydown", function (event) {
-  // Get the event code to match with digits and operators
-  let numCode = event.code[event.code.length - 1];
-  let operatorCode = event.code.slice(6).toLowerCase();
-  if (event.code === "NumpadDecimal") {
-    clickIt(allDigits[10]);
-  } else if (event.code === "NumpadEnter") {
-    clickIt(equalsKey);
-  } else if (event.code === "Backspace") {
-    clickIt(backKey);
-  }
-  // Itinerate through all the digits and click the one pressed
-  for (let i = 0; i < allDigits.length; i++) {
-    if (allDigits[i].textContent === numCode) {
-      clickIt(allDigits[i]);
-    }
-  }
-  // Itinerate through all the Operations and click the one pressed
-  for (let i = 0; i < allOperators.length; i++) {
-    if (allOperators[i].id === operatorCode) {
-      clickIt(allOperators[i]);
-    }
-  }
-});
-
 // Listen for an operation digit
 allOperators.forEach((operator) => {
   operator.addEventListener("click", function () {
@@ -274,16 +269,17 @@ allDigits.forEach((digit) => {
 equalsKey.addEventListener("click", function () {
   // Enable the button if there is any operation going on
   if (inputArr.length >= 2 && digitsArr.length > 0) {
-    inputArr.push(parseFloat(digitsArr.join("")));
-    startOperating();
-    checkForInfinity(results);
-    resultsDisplay.textContent = checkForDecimals(results);
-    operationDisplay.textContent = checkForDecimals(results);
-    // Clean up the results
-    displayArr[0] = checkForDecimals(results);
-    displayArr.splice(1);
-    digitsArr = [];
-    operationsCount = [];
+    equalsResults();
+    // inputArr.push(parseFloat(digitsArr.join("")));
+    // startOperating();
+    // checkForInfinity(results);
+    // resultsDisplay.textContent = checkForDecimals(results);
+    // operationDisplay.textContent = checkForDecimals(results);
+    // // Clean up the results
+    // displayArr[0] = checkForDecimals(results);
+    // displayArr.splice(1);
+    // digitsArr = [];
+    // operationsCount = [];
 
     console.log(operationsCount, inputArr, digitsArr, displayArr);
   }
@@ -320,6 +316,34 @@ clearKey.addEventListener("click", function () {
   clearAll();
 });
 
+// Keyboard support feature
+document.addEventListener("keydown", function (event) {
+  // Get the event code to match with digits and operators
+  let numCode = event.code[event.code.length - 1];
+  let operatorCode = event.code.slice(6).toLowerCase();
+  if (event.code === "NumpadDecimal") {
+    clickIt(allDigits[10]);
+  } else if (event.code === "NumpadEnter") {
+    clickIt(equalsKey);
+    equalsResults();
+  } else if (event.code === "Backspace") {
+    clickIt(backKey);
+  }
+  // Itinerate through all the digits and click the one pressed
+  for (let i = 0; i < allDigits.length; i++) {
+    if (allDigits[i].textContent === numCode) {
+      clickIt(allDigits[i]);
+    }
+  }
+  // Itinerate through all the Operations and click the one pressed
+  for (let i = 0; i < allOperators.length; i++) {
+    if (allOperators[i].id === operatorCode) {
+      clickIt(allOperators[i]);
+    }
+  }
+  console.log(event.code);
+});
+
 //-------------HTML APPENDING-----------//
 
 // Insert the little dots inside the speakers
@@ -332,10 +356,3 @@ for (let i = 0; i < miniSpeakers.length; i++) {
 }
 
 //-------------MAKE IT MUSICAL-----------//
-
-let playNote = (digit) => {
-  const noteAudio = document.getElementById(digit.dataset.note);
-  noteAudio.currentTime = 0;
-  noteAudio.play();
-  console.log(noteAudio);
-};
