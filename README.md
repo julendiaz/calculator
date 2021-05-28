@@ -293,7 +293,7 @@ let clickIt = (digit) => {
 ## Additional Improvements
 
 - [x] Add a Backspace button
-- [x] Add keybord support
+- [ ] Add keybord support
 - [ ] Make it musical
   - [ ] Add vinyl sound to clearAll
   - [ ] Add musical icon to the piano button
