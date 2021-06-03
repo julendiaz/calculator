@@ -2,7 +2,7 @@
 
 ![Frame 1portadagithub](assets/images/portada.png)
 
-Go to the [Live Preview](https://shifujulen.github.io/calculator/);
+Go to the [Live Preview](https://julendiaz.github.io/calculator/);
 
 ## Table of contents
 
